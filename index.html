@@ -59,8 +59,9 @@ function answer(q){
     return DATA.rows.map(r=>`<b>${esc(r[0])}</b>`).join('<br>');
   }
   if(idx===null)return "I couldn't map that question confidently to the available Information Technology synthetic data.";
+  const allMetric=/\ball\s+(services?|utili[sz]ation|sla|service level|incidents?)\b/.test(t);
   const wise=/\bwise\b|by domain|domain[- ]wise|domain by domain/.test(t);
-  if(wise){
+  if(allMetric || wise){
     return DATA.rows.map(r=>`<b>${esc(r[0])}</b> — ${esc(r[idx])}${idx===2||idx===3?'%':'K'}`).join('<br>');
   }
   const max=!/lowest|minimum|least|smallest/.test(t);
